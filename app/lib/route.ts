@@ -1,4 +1,6 @@
 import mongoose from "mongoose";
+import chalk from "chalk";
+import { NextResponse } from "next/server";
 
 let connection : typeof mongoose;
 
@@ -9,11 +11,12 @@ const connectToTheDatabase = async () => {
         if (!connection) {
           connection = await mongoose.connect(url);
         }
+        console.log(chalk.green.bold("Connection success", url));
         return connection
 
     }catch(e){
-        console.log(e)
-        throw new Error(e as any).message
+        console.log(chalk.red.bold("connection ayaa error ka jiro"), e);
+        return NextResponse.json(e, {status: 500})
     }
 }
 
