@@ -3,6 +3,7 @@ import connectToTheDatabase from "../lib/route";
 import PostModel from "../model/postMOdels";
 import chalk from "chalk";
 
+
 export async function  GET() {
     connectToTheDatabase();
     try{
@@ -35,3 +36,5 @@ export async function POST(req : NextRequest) {
    }
     
 }
+
+

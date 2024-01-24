@@ -1,19 +1,22 @@
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import React from 'react'
+import React from "react";
+import LoginForm from "../_components/LoginForm";
 
-const Login = () => {
+const Login : React.FC = async () => {
+  
+    const response  = await fetch('http://localhost:3000/api/signup', {
+        method: 'GET'
+    });
+    const data = await response.json();
+    console.log(data);
+    
+   
+
+
   return (
-    <div className='flex flex-col gap-10'>
-    <Label htmlFor="login" className='text-center'>Login </Label>
-    <form className='flex flex-col gap-6 my-4'>
-        <Input placeholder='Enter your name'/>
-        <Input placeholder='Enter your password'/>
-        <Button>Login</Button>
-    </form>
-    </div>
-  )
+    <div>
+        <LoginForm />
+    </div>   
+  );
 }
 
 export default Login
