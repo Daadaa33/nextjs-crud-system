@@ -1,17 +1,18 @@
-import connectToTheDatabase from "@/app/lib/route";
-import SingupModel from "@/app/model/singupModel";
 import { NextResponse } from "next/server";
 import * as bcrypt from "bcrypt";
 
 import { JWT_SECRET } from "@/lib/config";
 import * as jwt from "jsonwebtoken";
 
+
 export async function POST(req : NextResponse, res : NextResponse){
     try {
-        connectToTheDatabase();
         const {email, password} = await req.json();
-        const UserExist = await SingupModel.findOne({ email: email.toLowerCase() }).select("+password");
-        
+        const UserExist = await prisma?.users.findUnique({
+          where: {
+            email: email.toLowerCase(),
+          },
+        });
 
         if(!UserExist){
             return NextResponse.json({message: "Email is not found"}, { status: 404 })
@@ -26,11 +27,11 @@ export async function POST(req : NextResponse, res : NextResponse){
         // token generate 
         const expiresIn = 7 * 24 * 60 * 60; // 7 days
         
-        const token = jwt.sign({ _id: UserExist._id, email }, JWT_SECRET as string, { expiresIn });
-        
-        // res.cookies('token', token, {
+        const token = jwt.sign({ _id: UserExist.id, email }, JWT_SECRET as string, { expiresIn });
+
+        // Cookies.set('token', token, {
         //     httpOnly: true,
-        //     secure: false,
+        //     secure : false,
         //     maxAge: expiresIn * 1000
         // });
 

@@ -13,11 +13,17 @@ export interface StudentsProps {
 
 
 const Students = async () => {
-  const res = await fetch(`http://localhost:3000/api/students`, {
+  const res = await fetch(`http://localhost:3000/api/signup`, {
     cache: "no-cache",
   });
-  const students: StudentsProps[] = await res.json();
-
-  return <div className="flex flex-col gap-10">students</div>;
+  const students = await res.json();
+  return (
+    <div>
+      {/* {students?.map((student : StudentsProps) => {
+        return <Student key={student._id} {...student} />;
+      })} */}
+    students
+    </div>
+  );
 }
 export default Students

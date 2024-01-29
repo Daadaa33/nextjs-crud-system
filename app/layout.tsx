@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "./_components/Header";
+import ToastProvider from "./providers/ToastProvider";
 
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "EndPoints",
@@ -14,11 +13,13 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <div className="max-w-6xl mx-auto">
+      <body className="">
+        <div className="max-w-6xl mx-auto px-2">
         <Header />
+        <ToastProvider />
         {children}
         </div>
         </body>
