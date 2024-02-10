@@ -5,8 +5,8 @@ export default function Home() {
     // const {user } = useUser()
   return (
     <main className="">
-        {/* <Students /> */}
-students
+      {/* <Students /> */}
+      students
     </main>
   );
 }

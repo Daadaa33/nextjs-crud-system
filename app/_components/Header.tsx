@@ -8,7 +8,6 @@ import { ModeToggle } from "./mode-toggle";
 const Header = async () => {
 
     const user = await currentUser();
-
     return (
       <div className="h-12  mb-10 ">
         <div className="flex  justify-around items-center pb-6 px-2  ">
