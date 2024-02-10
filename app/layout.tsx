@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Header from "./_components/Header";
 import { ClerkProvider } from "@clerk/nextjs";
-
+import { ThemeProvider } from "@/components/theme-provider";
 
 export const metadata: Metadata = {
   title: "EndPoints",
@@ -13,18 +13,23 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
   return (
     <ClerkProvider>
-    <html lang="en">
-      <body className="">
-        <div className="max-w-6xl mx-auto px-2">
-        <Header />
-        {children}
-        </div>
+      <html lang="en">
+        <body className="">
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <div className="max-w-6xl mx-auto px-2">
+              <Header />
+              {children}
+            </div>
+          </ThemeProvider>
         </body>
-    </html>
+      </html>
     </ClerkProvider>
-
   );
 }
