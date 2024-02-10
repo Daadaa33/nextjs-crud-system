@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Header from "./_components/Header";
-import ToastProvider from "./providers/ToastProvider";
+import { ClerkProvider } from "@clerk/nextjs";
 
 
 export const metadata: Metadata = {
@@ -15,14 +15,16 @@ export default function RootLayout({
 }>) {
 
   return (
+    <ClerkProvider>
     <html lang="en">
       <body className="">
         <div className="max-w-6xl mx-auto px-2">
         <Header />
-        <ToastProvider />
         {children}
         </div>
         </body>
     </html>
+    </ClerkProvider>
+
   );
 }
